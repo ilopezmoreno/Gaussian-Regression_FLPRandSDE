@@ -1,0 +1,77 @@
+rm(list = ls())
+
+library(readxl)
+RData_WBD2019_FLP_employ_agri_indu_serv <- read_excel("~/1. PhD Manchester/World Bank Data - Empleo agricola, industrial, servicios y FLP/RData_WBD2019_FLP_employ_agri_indu_serv.xlsx")
+
+View(RData_WBD2019_FLP_employ_agri_indu_serv)
+
+database <- RData_WBD2019_FLP_employ_agri_indu_serv
+
+library(ggplot2)
+
+# Factoring different income groups categories
+database$income_group <- factor(database$income_group)
+
+# Gaussian Regression / Scatter Plot: FLP and agricultural employment
+ggplot(database, aes(x=employ_agri_2019,y=FLPR_2019,color = income_group)) +
+  geom_point(shape=19) +
+  geom_smooth(method="auto", se= TRUE, color="red") +
+  xlab("Share of employment in the agricultural sector") +
+  ylab("Female Labor Participation Rate") +
+  labs(colour = "Income Groups") +
+  ggtitle("Gaussian Regression: FLP and Agricultural Employment, 2019")
+
+
+# Gaussian Regression / Scatter Plot: FLP and industrial employment
+ggplot(database, aes(x=employ_ind_2019,y=FLPR_2019,color = income_group)) +
+  geom_point(shape=19) +
+  geom_smooth(method="auto", se= TRUE, color="red") +
+  xlab("Share of employment in the industrial sector") +
+  ylab("Female Labor Participation Rate") +
+  labs(colour = "Income Groups") +
+  ggtitle("Gaussian Regression: FLP and Industrial Employment, 2019")
+
+
+# Gaussian Regression / Scatter Plot: FLP and service employment
+ggplot(database, aes(x=employ_serv_2019,y=FLPR_2019,color = income_group)) +
+  geom_point(shape=19) +
+  geom_smooth(method="auto", se= TRUE, color="red") +
+  xlab("Share of employment in the service sector") +
+  ylab("Female Labor Participation Rate") +
+  labs(colour = "Income Groups") +
+  ggtitle("Gaussian Regression: FLP and Service Employment, 2019")
+
+
+
+
+# Factoring different categories of economies
+database$econ_category <- factor(database$econ_category)
+
+# Gaussian Regression / Scatter Plot: FLP and agricultural employment
+ggplot(database, aes(x=employ_agri_2019,y=FLPR_2019,color = econ_category)) +
+  geom_point(shape=19) +
+  geom_smooth(method="auto", se= TRUE, color="red") +
+  xlab("Share of employment in the agricultural sector") +
+  ylab("Female Labor Participation Rate") +
+  labs(colour = "Sectoral Distribution of Employment") +
+  ggtitle("Gaussian Regression: FLP and Agricultural Employment across countries, 2019")
+
+
+# Gaussian Regression / Scatter Plot: FLP and industrial employment
+ggplot(database, aes(x=employ_ind_2019,y=FLPR_2019,color = econ_category)) +
+  geom_point(shape=19) +
+  geom_smooth(method="auto", se= TRUE, color="red") +
+  xlab("Share of employment in the industrial sector") +
+  ylab("Female Labor Participation Rate") +
+  labs(colour = "Sectoral Distribution of Employment") +
+  ggtitle("Gaussian Regression: FLP and Industrial Employment across countries, 2019")
+
+
+# Gaussian Regression / Scatter Plot: FLP and service employment
+ggplot(database, aes(x=employ_serv_2019,y=FLPR_2019,color = econ_category)) +
+  geom_point(shape=19) +
+  geom_smooth(method="auto", se= TRUE, color="red") +
+  xlab("Share of employment in the service sector") +
+  ylab("Female Labor Participation Rate") +
+  labs(colour = "Sectoral Distribution of Employment") +
+  ggtitle("Gaussian Regression: FLP and Service Employment across countries, 2019")
